@@ -3,11 +3,6 @@ const { Component, createElement } = React;
 const ListItem = props => {
 	return createElement('li', { className: 'list-item', onClick: props.removeHandler, 'data-val': props.dVal }, props.content);
 }
-
-// const ConfButton = props => {
-// 	return createElement('button', { onClick: props.hideModal }, props.text);
-// }
-
 class List extends Component {
 	constructor() {
 		super();
@@ -16,14 +11,6 @@ class List extends Component {
 			inputVal: ''
 		}
 	}
-	// hideModal(confirmVal) {
-
-	// }
-	// showModal(val, text) {
-	// 	const mod = document.getElementById('modal');
-	// 	mod.innerText = `Delete ${text}?`;
-	// 	mod.classList.remove('hidden');
-	// }
 	removeHandler(e) {
 		const val = e.target.getAttribute('data-val');
 		const { innerText } = e.target;
@@ -40,7 +27,8 @@ class List extends Component {
 	addItemHandler() {
 		this.setState((prevState) => {
 			return { items: prevState.items.concat(this.state.inputVal), inputVal: '' }
-		})
+		});
+		document.getElementById('inputElem').focus();
 	}
 	inputChangeHandler(e) {
 		const { target } = e;
@@ -52,15 +40,13 @@ class List extends Component {
 
 	render() {
 		return createElement('div', { className: 'list' }, [
-			// createElement('div', { key: 'modal', id: 'modal', className: 'hidden' }, [
-			// 	createElement(ConfButton, { key: 'yes-button', hideModal: this.hideModal, text: 'Yes' }),
-			// 	createElement(ConfButton, { key: 'no-button', hideModal: this.hideModal, text: 'No' }),
-			// ]),
-			createElement('input', {
-				key: 'input', onChange: this.inputChangeHandler.bind(this),
-				placeholder: 'New item text...', value: this.state.inputVal
-			}),
-			createElement('button', { key: 'button', onClick: this.addItemHandler.bind(this), disabled: this.state.inputVal === '' ? true : false }, 'Add item'),
+			createElement('form', { key: 'form' }, [
+				createElement('input', {
+					key: 'input', id: 'inputElem', onChange: this.inputChangeHandler.bind(this),
+					placeholder: 'New item text...', value: this.state.inputVal
+				}),
+				createElement('button', { key: 'button', onClick: this.addItemHandler.bind(this), disabled: this.state.inputVal === '' ? true : false }, 'Add item')
+			]),
 			createElement('ul', { key: 'root' }, this.state.items.map((item, i) => {
 				return createElement(ListItem, { content: item, key: i, dVal: i, removeHandler: this.removeHandler.bind(this) });
 			}))
