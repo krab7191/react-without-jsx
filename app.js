@@ -56,11 +56,14 @@ class List extends Component {
 			// 	createElement(ConfButton, { key: 'yes-button', hideModal: this.hideModal, text: 'Yes' }),
 			// 	createElement(ConfButton, { key: 'no-button', hideModal: this.hideModal, text: 'No' }),
 			// ]),
-			createElement('input', { key: 'input', onChange: this.inputChangeHandler.bind(this), placeholder: 'New item text...', value: this.state.inputVal }),
+			createElement('input', {
+				key: 'input', onChange: this.inputChangeHandler.bind(this),
+				placeholder: 'New item text...', value: this.state.inputVal
+			}),
+			createElement('button', { key: 'button', onClick: this.addItemHandler.bind(this), disabled: this.state.inputVal === '' ? true : false }, 'Add item'),
 			createElement('ul', { key: 'root' }, this.state.items.map((item, i) => {
 				return createElement(ListItem, { content: item, key: i, dVal: i, removeHandler: this.removeHandler.bind(this) });
-			})),
-			createElement('button', { key: 'button', onClick: this.addItemHandler.bind(this), disabled: this.state.inputVal === '' ? true : false }, 'Add item')
+			}))
 		]);
 	}
 }
