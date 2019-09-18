@@ -1,0 +1,29 @@
+.list-item {
+	padding: 15px;
+	border-radius: 10px;
+	width: 50%;
+	max-width: 250px;
+}
+
+.list-item:hover, .list-item:active, .list-item:focus {
+	background-color: lightsteelblue;
+	box-shadow: 1px 2px;
+	cursor: pointer;
+}
+
+#modal {
+	text-align: center;
+	position: fixed;
+	top: 45px;
+	width: 80%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	border-radius: 4px;
+	background-color: orangered;
+	box-shadow: 1px 1px 8px;
+	padding: 30px;
+}
+
+.hidden {
+	display: none;
+}
